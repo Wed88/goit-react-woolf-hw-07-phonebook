@@ -1,15 +1,15 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeFilter } from '../../redux/contactsSlice';
-import { getFilter } from '../../redux/contactsSelectors';
+import { selectFilter } from '../../redux/contactsSelectors';
 import { FilterContainer, Label, Input } from './Filter.styled';
 
 const Filter = () => {
-  const filter = useSelector(getFilter);
+  const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
 
-  const handleFilterChange = event => {
-    dispatch(changeFilter(event.target.value));
+  const handleFilterChange = value => {
+    dispatch(changeFilter(value));
   };
 
   return (
@@ -19,7 +19,7 @@ const Filter = () => {
         type="text"
         id="filter"
         value={filter}
-        onChange={handleFilterChange}
+        onChange={evt => handleFilterChange(evt.target.value)}
       />
     </FilterContainer>
   );

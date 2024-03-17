@@ -1,13 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contactsSlice';
+import { deleteContact } from '../../redux/thunk';
 import { Item, Text, Button } from './ContactItem.styled';
 
 const ContactItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
 
-  const handleDeleteContact = () => {
-    dispatch(deleteContact(id));
+  const handleDeleteContact = contactId => {
+    dispatch(deleteContact(contactId));
   };
 
   return (
@@ -15,7 +15,7 @@ const ContactItem = ({ id, name, number }) => {
       <Text>
         {name}: {number}
       </Text>
-      <Button type="button" onClick={handleDeleteContact}>
+      <Button type="button" onClick={() => handleDeleteContact(id)}>
         Delete
       </Button>
     </Item>
